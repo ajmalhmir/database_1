@@ -6,6 +6,12 @@ cd ~/database_1
 # Activate the virtual environment
 source venv/bin/activate
 
+# Ensure database directory has proper permissions
+echo "Setting up database permissions..."
+touch db.sqlite3
+chmod 664 db.sqlite3
+sudo chown -R ubuntu:www-data .
+
 # Migrate any DB changes
 python manage.py makemigrations --noinput
 python manage.py migrate --noinput

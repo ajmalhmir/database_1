@@ -19,8 +19,18 @@ cd "/home/ubuntu/$PROJECT_MAIN_DIR_NAME"
 echo "Activating virtual environment..."
 source "/home/ubuntu/$PROJECT_MAIN_DIR_NAME/venv/bin/activate"
 
-# Run collectstatic command
+# Ensure database directory has proper permissions
+echo "Setting up database permissions..."
+touch db.sqlite3
+chmod 664 db.sqlite3
+sudo chown -R ubuntu:www-data .
 
+# Run migrations to ensure database tables exist
+echo "Running database migrations..."
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
+
+# Run collectstatic command
 echo "Running collectstatic command..."
 python manage.py collectstatic --noinput
 

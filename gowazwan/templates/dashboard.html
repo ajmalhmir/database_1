@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gowazwan Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      padding: 40px;
+    }
+    h1 {
+      color: #2b7a78;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 45%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+    th {
+      background-color: #2b7a78;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Gowazwan Admin Dashboard</h1>
+
+  <div class="stats">
+    <div class="card">
+      <h3>Total Users</h3>
+      <p>{{ total_users }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Balance</h3>
+      <p>₹{{ total_balance }}</p>
+    </div>
+  </div>
+
+  <h2>👥 User List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Balance (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.balance }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No users found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>
